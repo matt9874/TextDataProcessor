@@ -12,7 +12,6 @@ class TextFilesParser:
         self.wordValidator=wv.WordValidator()
         
     def Parse(self, textFiles):
-#        formattedTextFiles=map(self.RemoveLineEndings,textFiles)
         wordCounts = {}
         wordDocuments={}
         wordSentences={}
@@ -20,7 +19,7 @@ class TextFilesParser:
             with open( fileName, "r" ) as fileObject:
                 rawText=fileObject.read()
                 formattedRawText=self.textFormatter.Format(rawText)
-                sentences = tokenize.sent_tokenize(formattedRawText) 
+                sentences = tokenize.sent_tokenize(formattedRawText.decode('utf-8')) 
                 for sentence in sentences:
                     words = tokenize.word_tokenize(sentence)
                     for word in words:
