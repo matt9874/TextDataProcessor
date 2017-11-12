@@ -1,5 +1,6 @@
 import wordDataMapper as wdm
 import textDataFormatter as tdf
+import wordValidator as wv
 #import nltk
 #nltk.download('punkt')
 from nltk import tokenize
@@ -8,6 +9,7 @@ class TextFilesParser:
     def __init__(self):
         self.wordDataMapper=wdm.WordDataMapper()
         self.textFormatter=tdf.TextDataFormatter()
+        self.wordValidator=wv.WordValidator()
         
     def Parse(self, textFiles):
 #        formattedTextFiles=map(self.RemoveLineEndings,textFiles)
@@ -22,14 +24,16 @@ class TextFilesParser:
                 for sentence in sentences:
                     words = tokenize.word_tokenize(sentence)
                     for word in words:
-                        if (word in wordCounts.keys()):
-                            wordCounts[word]=wordCounts[word]+1
-                            wordSentences[word].add(sentence)
-                            wordDocuments[word].add(fileName)
-                        else:
-                            wordCounts[word]=1
-                            wordSentences[word]={sentence}
-                            wordDocuments[word]={fileName}
+                        if (self.wordValidator.Validate(word)):
+                            word=word.lower()
+                            if (word in wordCounts.keys()):
+                                wordCounts[word]=wordCounts[word]+1
+                                wordSentences[word].add(sentence)
+                                wordDocuments[word].add(fileName)
+                            else:
+                                wordCounts[word]=1
+                                wordSentences[word]={sentence}
+                                wordDocuments[word]={fileName}
         
         output = self.wordDataMapper.MapWordData(wordCounts, wordDocuments, wordSentences)
         
