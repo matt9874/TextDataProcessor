@@ -7,5 +7,5 @@ class TextFilesOutputter:
         numWords=len(textDataRecords)
         for i in range(0,numWords):
             wordData=textDataRecords[i]
-            formattedData.append([wordData.word, wordData.count, ', '.join(wordData.containingDocuments), ', '.join(wordData.containingSentences)])
-        print tab.tabulate(formattedData, headers=['Word', 'Count', 'Documents', 'Sentences containing the word'], tablefmt='orgtbl')
+            formattedData.append([wordData.word, wordData.count, ', '.join(wordData.containingDocuments), '\n\n'.join(wordData.containingSentences)])
+        print tab.tabulate(formattedData, headers=['Word', 'Count', 'Documents', 'Sentences containing the word'], tablefmt='grid')
