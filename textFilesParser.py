@@ -1,5 +1,4 @@
 import wordDataMapper as wdm
-from collections import OrderedDict
 #import nltk
 #nltk.download('punkt')
 from nltk import tokenize
@@ -14,8 +13,7 @@ class TextFilesParser:
         for fileName in textFiles:
             with open( fileName, "r" ) as fileObject:
                 rawText=fileObject.read()
-                sentences = tokenize.sent_tokenize(rawText) # this gives us a list of sentences
-# now loop over each sentence and tokenize it separately
+                sentences = tokenize.sent_tokenize(rawText) 
                 for sentence in sentences:
                     words = tokenize.word_tokenize(sentence)
                     for word in words:
@@ -27,9 +25,8 @@ class TextFilesParser:
                             wordCounts[word]=1
                             wordSentences[word]={sentence}
                             wordDocuments[word]={fileName}
-        sortedWordCounts=OrderedDict(sorted(wordCounts.items(), key=lambda t: -t[1]))
         
-        output = self.wordDataMapper.MapWordData(sortedWordCounts, wordDocuments, wordSentences)
+        output = self.wordDataMapper.MapWordData(wordCounts, wordDocuments, wordSentences)
         
         return output
     
