@@ -12,5 +12,14 @@ class TextFilesOutputter:
             outputSize=self.numResults
         for i in range(0,outputSize):
             wordData=textDataRecords[i]
-            formattedData.append([wordData.word, wordData.count, "\n".join(tw.wrap(', '.join(wordData.containingDocuments), 30)), "\n".join(tw.wrap('\n\n'.join(wordData.containingSentences), 30))])
+#            print '\n\n'.join(wordData.containingSentences)
+#            print tw.wrap('\n\n'.join(wordData.containingSentences), 30)
+            formattedData.append([wordData.word, wordData.count, self.FormatDocumentsTableCellText(wordData.containingDocuments, 40), self.FormatSentencesTableCellText(wordData.containingSentences, 40)])
         print tab.tabulate(formattedData, headers=['Word', 'Count', 'Documents', 'Sentences containing the word'], tablefmt='grid')
+    
+    def FormatSentencesTableCellText(self, sentencesList, columnWidth):
+        sentencesListWithLineEndings=["\n".join(tw.wrap(sentence, columnWidth)) for sentence in sentencesList]
+        return "\n\n".join(sentencesListWithLineEndings)
+    
+    def FormatDocumentsTableCellText(self, documentsList, columnWidth):
+        return "\n".join(tw.wrap(', '.join(documentsList), columnWidth))
