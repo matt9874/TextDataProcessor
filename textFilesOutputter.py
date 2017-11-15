@@ -1,9 +1,11 @@
+from textDataOutputter import TextDataOutputter
+
 import tabulate as tab
 import textwrap as tw
 
-class TextFilesOutputter:
+class TabulatedWordCountOutputter(TextDataOutputter):
     def __init__(self):
-        self.numResults=5
+        self.numResults=10
     def Display(self,textDataRecords):
         textDataRecords.sort(key=lambda x: x.count, reverse=True)
         formattedData=[]

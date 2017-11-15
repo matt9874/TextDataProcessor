@@ -1,15 +1,13 @@
-import textFilesProvider as tfProv
-import textFilesParser as tfParser
-import textFilesOutputter as tfOutP
+from textDataProcessor import TextDataProcessor
 
-class TextFilesProcessor:
-    def __init__(self):
-        self.textFilesProvider=tfProv.TextFilesProvider()
-        self.textFilesParser=tfParser.TextFilesParser()
-        self.textFilesOutputter=tfOutP.TextFilesOutputter()
+class TextFilesProcessor(TextDataProcessor):
+    def __init__(self, textFilesProvider, textFilesParser, textFilesOutputter):
+        self.textDataProvider=textFilesProvider
+        self.textDataParser=textFilesParser
+        self.textDataOutputter=textFilesOutputter
     def ProcessData(self):
-        textFilesData = self.textFilesProvider.GetTextFilesData()
-        parsedTextFilesData = self.textFilesParser.Parse(textFilesData)
-        self.textFilesOutputter.Display(parsedTextFilesData)
+        textFilesData = self.textDataProvider.GetTextData()
+        parsedTextFilesData = self.textDataParser.Parse(textFilesData)
+        self.textDataOutputter.Display(parsedTextFilesData)
         
 

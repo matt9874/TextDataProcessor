@@ -1,8 +1,8 @@
 from abc import ABCMeta, abstractmethod
 
-class TextDataFormatter:
+class TextDataProvider:
     __metaclass__ = ABCMeta
     
     @abstractmethod
-    def Format(self):
+    def GetTextData(self):
         pass
