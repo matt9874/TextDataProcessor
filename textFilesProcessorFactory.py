@@ -17,8 +17,16 @@ class TextFilesProcessorFactory(TextDataProcessorFactory):
     
     @staticmethod
     def CreateParser():
-        return TextFilesParser(NewLineRemover(),WordDataMapper())
+        return TextFilesParser(TextFilesProcessorFactory.CreateFormatter(), TextFilesProcessorFactory.CreateResultsMapper())
     
     @staticmethod
     def CreateOutputter():
         return TabulatedWordCountOutputter()
+    
+    @staticmethod
+    def CreateFormatter():
+        return NewLineRemover()
+    
+    @staticmethod
+    def CreateResultsMapper():
+        return WordDataMapper()
