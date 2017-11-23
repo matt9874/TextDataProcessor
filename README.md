@@ -1,5 +1,7 @@
 # TextDataProcessor
 #
+# Written in Python 2.7 
+#
 # If you are on a Windows machine, please create a new folder in the C drive called TextFilesInput.
 # Then place text files in this folder
 #
